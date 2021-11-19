@@ -58,7 +58,9 @@ public class Einkunn implements Comparable<Einkunn> {
     }
 
     /**
-     * Skilar true ef lokaprófseinkunn er stærri eða jafnt og 5.0     *     * @return true eða false
+     * Skilar true ef lokaprófseinkunn er stærri eða jafnt og 5.0     *
+     *
+     * @return true eða false
      * eftir því hvort lokaprófseinkunn er stærri eða jafnt og 5.0
      */
     public boolean erLagmarkseinkunn() {

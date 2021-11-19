@@ -1,8 +1,11 @@
+import java.util.Arrays;
+
 /******************************************************************************
  *  Nafn    : Gunnar Björn Þrastarson
  *  T-póstur: gbt6@hi.is
  *
- *  Lýsing  : Lýsing á hvað forritið gerir, inntak, útreikningar, úttak
+ *  Lýsing  : Forritið Heldur utan um spil og vinnur með Forritinu Spil til
+ *  þess að bæta við og taka af spil úr hendi
  *
  *
  *****************************************************************************/
@@ -11,97 +14,80 @@
 public class SpilAHendi {
 
     private int mestiFjoldi;
-
     private Spil[] fylkjaSpil;
-
 
     public SpilAHendi(int n) {
 
         mestiFjoldi = n;
-
-        fylkjaSpil = new Spil[n];
+        fylkjaSpil = new Spil[mestiFjoldi];
 
     }
 
-
+    /**
+     * Bætir við spili á hendina
+     * @param s Nýtt spil
+     */
     public void baetaVidSpili(Spil s) {
 
-
-        for (int i = 0; i < mestiFjoldi; i++) {
-
-            if (s == null) break;
-
-            if (s.equals(fylkjaSpil[i])) {
-
-                s = null;
-
+        for (int i = 0; i < fylkjaSpil.length; i++) {
+            if (fylkjaSpil[i] == s) break;
+            if (fylkjaSpil[i] == null) {
+                fylkjaSpil[i] = s;
+                break;
             }
-
-            fylkjaSpil[fylkjaSpil.length - 1] = s;
-
         }
-
-
     }
 
-
+    /**
+     * Tekur spil af hendinni
+     * @return Nýrri hendi þar sem búið er að taka seinasta
+     * spilið af hendi
+     */
     public Spil takaSpilAfHendi() {
-
-
-        if (fylkjaSpil.length == 0) {
-
-            return null;
-
+        Spil temp;
+        if (fylkjaSpil[fylkjaSpil.length - 1] != null) {
+            temp = fylkjaSpil[fylkjaSpil.length - 1];
+            fylkjaSpil[fylkjaSpil.length - 1] = null;
+            return temp;
         }
-
-        Spil temp = fylkjaSpil[fylkjaSpil.length - 1];
-
-        fylkjaSpil[fylkjaSpil.length - 1] = null;
-
-        return temp;
-
+        else {
+            for (int i = 1; i < fylkjaSpil.length; i++) {
+                if (fylkjaSpil[i] == null) {
+                    temp = fylkjaSpil[i - 1];
+                    fylkjaSpil[i - 1] = null;
+                    return temp;
+                }
+            }
+        }
+        return null;
     }
-
 
     public String toString() {
-
-        return "SpilAHendi{}";
-
+        return Arrays.toString(fylkjaSpil);
     }
-
 
     public static void main(String[] args) {
 
+        SpilAHendi prufa = new SpilAHendi(4);
+        System.out.println(prufa.takaSpilAfHendi());
 
-        String[] rank = {
+        Spil s1 = new Spil("Þristur", "Tígull");
+        Spil s2 = new Spil("Fjarki", "Lauf");
+        Spil s3 = new Spil("Átta", "Spaði");
+        Spil s4 = new Spil("Kóngur", "Hjarta");
+        Spil s5 = new Spil("Tía", "Lauf");
+        Spil s6 = new Spil("Tvistur", "Tígull");
+        Spil s7 = new Spil("Gosi", "Hjarta");
 
-                "Ás", "Tvistur", "Þristur", "Fjarki", "Fimma",
-
-                "Sexa", "Sjöa", "Átta", "Nía", "Tía", "Gosi", "Drottning", "Kóngur"
-
-        };
-
-
-        String[] suit = { "Hjarta", "Spaði", "Tígull", "Lauf" };
-
-
-        SpilAHendi hendi = new SpilAHendi(5);
-
-
-        Spil s1 = new Spil(suit[StdRandom.uniform(suit.length)],
-
-                           rank[StdRandom.uniform(rank.length)]);
-
-        hendi.baetaVidSpili(s1);
+        prufa.baetaVidSpili(s1);
+        prufa.baetaVidSpili(s2);
+        prufa.baetaVidSpili(s3);
+        prufa.baetaVidSpili(s4);
+        prufa.baetaVidSpili(s5);
+        prufa.baetaVidSpili(s6);
+        prufa.baetaVidSpili(s7);
 
 
-        Spil s2 = new Spil(suit[StdRandom.uniform(suit.length)],
-
-                           rank[StdRandom.uniform(rank.length)]);
-
-        hendi.baetaVidSpili(s2);
-
-
+        System.out.println(prufa.toString());
     }
-
 }

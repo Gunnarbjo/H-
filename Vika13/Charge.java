@@ -18,7 +18,6 @@ public class Charge {
 
     private final double q;        // charge
 
-
     public boolean equals(Object c) {
 
         if (this == c) return true;
@@ -37,7 +36,6 @@ public class Charge {
         return Objects.hash(rx, ry, q);
 
     }
-
 
     public Charge(double x0, double y0, double q0) {
 
