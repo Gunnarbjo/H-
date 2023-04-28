@@ -15,20 +15,11 @@ public class SpilAHendi {
 
     private int mestiFjoldi;
     private Spil[] fylkjaSpil;
-
     public SpilAHendi(int n) {
-
         mestiFjoldi = n;
         fylkjaSpil = new Spil[mestiFjoldi];
-
     }
-
-    /**
-     * Bætir við spili á hendina
-     * @param s Nýtt spil
-     */
     public void baetaVidSpili(Spil s) {
-
         for (int i = 0; i < fylkjaSpil.length; i++) {
             if (fylkjaSpil[i] == s) break;
             if (fylkjaSpil[i] == null) {
@@ -37,12 +28,6 @@ public class SpilAHendi {
             }
         }
     }
-
-    /**
-     * Tekur spil af hendinni
-     * @return Nýrri hendi þar sem búið er að taka seinasta
-     * spilið af hendi
-     */
     public Spil takaSpilAfHendi() {
         Spil temp;
         if (fylkjaSpil[fylkjaSpil.length - 1] != null) {
@@ -61,16 +46,12 @@ public class SpilAHendi {
         }
         return null;
     }
-
     public String toString() {
         return Arrays.toString(fylkjaSpil);
     }
-
     public static void main(String[] args) {
-
         SpilAHendi prufa = new SpilAHendi(4);
         System.out.println(prufa.takaSpilAfHendi());
-
         Spil s1 = new Spil("Þristur", "Tígull");
         Spil s2 = new Spil("Fjarki", "Lauf");
         Spil s3 = new Spil("Átta", "Spaði");
@@ -78,7 +59,6 @@ public class SpilAHendi {
         Spil s5 = new Spil("Tía", "Lauf");
         Spil s6 = new Spil("Tvistur", "Tígull");
         Spil s7 = new Spil("Gosi", "Hjarta");
-
         prufa.baetaVidSpili(s1);
         prufa.baetaVidSpili(s2);
         prufa.baetaVidSpili(s3);
@@ -86,8 +66,6 @@ public class SpilAHendi {
         prufa.baetaVidSpili(s5);
         prufa.baetaVidSpili(s6);
         prufa.baetaVidSpili(s7);
-
-
         System.out.println(prufa.toString());
     }
 }
